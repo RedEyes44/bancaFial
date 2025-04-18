@@ -6,6 +6,10 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Vector;
 
+
+/**
+ * Classe per la gestione di un'intera banca e dei suoi utenti
+ */
 public class Banca {
 
 	private int nUtenti = 0;
@@ -14,6 +18,11 @@ public class Banca {
 	private Vector<File> utenti = new Vector<File>();
 	private Vector<FileWriter> storico = new Vector<FileWriter>();
 	private Vector<Utente> users = new Vector<Utente>();
+	
+	/**
+	 * Costruttore della banca
+	 * @throws IOException
+	 */
 	
 	public Banca() throws IOException {
 		this.numbUtenti = new File("nUtenti.txt");
@@ -41,9 +50,20 @@ public class Banca {
 		assignment();
 	}
 	
+	/**
+	 * 
+	 * @return : il numero attuale di utenti
+	 */
+	
 	public int getNUtenti() {
 		return this.nUtenti;
 	}
+	
+	/**
+	 * Scrive sull'apposito file il nuovo numero di utenti
+	 * @param nuovo : nuovo numero di utenti
+	 * @throws FileNotFoundException
+	 */
 	
 	public void setNUtenti(int nuovo) throws FileNotFoundException {
 		this.nUtenti=nuovo;
@@ -52,7 +72,10 @@ public class Banca {
 		pw.close();
 	}
 	
-
+	/**
+	 * Serve ad ottenere i valori, da utilizzare nel codice, dai rispettivi file degli utenti
+	 * @throws FileNotFoundException
+	 */
 	
 	
 	private void assignment() throws FileNotFoundException {
@@ -83,8 +106,14 @@ public class Banca {
 		
 		
 	}
+	
+	/**
+	 * Successivamente alla registrazione, i dati dell'utente vengono salvati in un nuovo file
+	 * @param u : l'oggetto utente contenente i suoi dati
+	 * @throws IOException
+	 */
 
-	public void creaUtente(Utente u) throws IOException {
+	private void creaUtente(Utente u) throws IOException {
 		users.add(u);
 		File nuovo = new File("utente"+(this.nUtenti+1)+".txt");
 		
@@ -124,6 +153,13 @@ public class Banca {
 		
 	}
 	
+	/**
+	 * Permette di verificare la disponibilita' del deposito
+	 * @param portafoglio : portafoglio disponibile
+	 * @param saldo : soldi da depositare
+	 * @return : true se si puo' depositare, in caso contrario false
+	 */
+	
 	
 	public static boolean deposita(double portafoglio, double saldo) {
 
@@ -132,6 +168,13 @@ public class Banca {
 
 		return true;
 	}
+	
+	/**
+	 * Permette di verificare la disponibilita' del prelievo
+	 * @param contoBancario : conto disponibile
+	 * @param saldo : soldi da depositare
+	 * @return : true se si puo' prelevare, in caso contrario false
+	 */
 
 	public static boolean preleva(double contoBancario, double saldo) {
 
@@ -140,6 +183,13 @@ public class Banca {
 
 		return true;
 	}
+	
+	/**
+	 * Avvia l'investimento
+	 * @param grandezzaRischio : la grandezza del rischio
+	 * @param soldiDaInvestire : i soldi che si vogliono investire
+	 * @return : il guadagno ottenuto dall'investimento
+	 */
 
 	public static double investimento(int grandezzaRischio, double soldiDaInvestire) {
 		double guadagno;
@@ -152,10 +202,12 @@ public class Banca {
 
 		return guadagno;
 	}
-
-	public Utente getUtente(int i) {
-		return users.elementAt(i);
-	}
+	
+	/**
+	 * Salva una qualsiasi transazione di denaro sullo storico dell'utente
+	 * @param message : il messaggio di notifica
+	 * @param index : il numero identificativo dell'utente
+	 */
 
 	public void transazione(String message, int index) {
 
@@ -164,7 +216,13 @@ public class Banca {
 		pw.println(message);
 	}
 
-	
+	/**
+	 * Permette la registrazione di un nuovo utente e l'inserimento dei suoi dati nella banca
+	 * @param nome : il nome del nuovo utente
+	 * @param password  : la password del nuovo utente
+	 * @return true se la registrazione e' andata a buon fine, in caso contrario false;
+	 * @throws IOException
+	 */
 	
 	public boolean registrazione(String nome, String password) throws IOException {
 		
@@ -189,6 +247,13 @@ public class Banca {
 		return ok;
 	}
 	
+	/**
+	 * Permette ad un utente registrato di accedere al proprio account
+	 * @param nome : il nome dell'utente
+	 * @param password : la password dell'utente
+	 * @return : l'Utente trovato se e' registrato, null se e' assente
+	 */
+	
 	public Utente login(String nome, String password) {
 		for(int i=0;i<users.size();i++) {
 			if(users.elementAt(i).getNome().equalsIgnoreCase(nome)) {
@@ -200,6 +265,12 @@ public class Banca {
 		
 		return null;
 	}
+	
+	/**
+	 * Salva i dati dell'utente sul suo file dopo essere stati modificati nell'uso dell'applicativo
+	 * @param u : l'utente da salvare
+	 * @throws FileNotFoundException
+	 */
 
 	public void salvaUtente(Utente u) throws FileNotFoundException {
 
