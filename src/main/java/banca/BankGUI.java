@@ -4,12 +4,21 @@ import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Classe per l'utilizzo di una GUI e per l'avvio del metodo main
+ */
+
 public class BankGUI {
     private JFrame frame;
     private Menu menu;
     private Utente utente;
     private Banca banca;
     private double soldiDaInvestire=0;
+    
+    /**
+     * Costruttore della classe
+     * @throws IOException
+     */
     
     public BankGUI() throws IOException {
         menu = new Menu();
@@ -21,6 +30,10 @@ public class BankGUI {
 		}
         initLoginMenu();
     }
+    
+    /**
+     * Schermata di login/registrazione
+     */
 
     private void initLoginMenu() {
         frame = new JFrame("Accesso Utente");
@@ -74,6 +87,11 @@ public class BankGUI {
         frame.add(panel);
         frame.setVisible(true);
     }
+    
+    /**
+     * Menu' principale, che mette a disposizione le azioni che si possono compiere con il proprio account
+     * 
+     */
 
     private void showMainMenu() {
         frame.getContentPane().removeAll();
@@ -109,6 +127,12 @@ public class BankGUI {
         frame.revalidate();
         frame.repaint();
     }
+    
+    /**
+     * Gestisce lo switch per selezionare l'operazione desiderata
+     * @param choice : scelta dell'utente
+     * @throws FileNotFoundException
+     */
 
     private void handleMainChoice(int choice) throws FileNotFoundException {
         menu.setSceltaMain(choice);
@@ -137,6 +161,12 @@ public class BankGUI {
             }
         }
     }
+    
+    /**
+     * Permette di inserire un valore e svolgere un operazione
+     * @param title : titolo operazione
+     * @param type : scelta operazione
+     */ 
 
     private void showAmountInput(String title, int type) {
         
@@ -202,6 +232,10 @@ public class BankGUI {
             }
             
         }
+    
+    /**
+     * Schermata investimenti
+     */
     
 
     private void showInvestmentMenu() {
@@ -291,6 +325,10 @@ public class BankGUI {
         }
         
     }
+    
+    /**
+     * Schermata avanzamento mesi
+     */
 
     private void advanceMonths() {
         String input = JOptionPane.showInputDialog(frame, "Inserisci numero di mesi da avanzare:");
@@ -316,6 +354,11 @@ public class BankGUI {
             JOptionPane.showMessageDialog(frame, "Numero di mesi non valido.");
         }
     }
+    
+    /**
+     * Visualizzazione conto o portafoglio
+     * @param tipo : scelta
+     */
 
     private void showStatus(int tipo) {
         if (tipo == 5) {
@@ -324,6 +367,11 @@ public class BankGUI {
             JOptionPane.showMessageDialog(frame, "Portafoglio: " + utente.getPortafoglio() + " euro");
         }
     }
+    
+    /**
+     * Avvio del programma con il metodo main
+     * @param args
+     */
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
