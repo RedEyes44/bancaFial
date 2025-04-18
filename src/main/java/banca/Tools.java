@@ -1,18 +1,18 @@
 import java.util.Scanner;
+
 import java.util.Vector;
 
-public class Tools {
+/**
+ * Classe che mette a disposizione una serie di metodi utili in vari scenari
+ */
 
-	public static String trim(String x) {
-		String s = "";
-		for (int i = 0; i < x.length(); i++) {
-			char c = x.charAt(i);
-			if (c != ' ') {
-				s = s + c;
-			}
-		}
-		return s;
-	}
+public class Tools {
+	
+	/**
+	 * Converte tutte le virgole di una stringa in punti
+	 * @param s : vecchia stringa
+	 * @return : stringa modificata
+	 */
 	
 	public static String virgolaPunto(String s) {
 		String nuova = "";
@@ -28,11 +28,23 @@ public class Tools {
 		return nuova;
 	}
 	
+	/**
+	 * Arrotonda un double alla seconda cifra decimale
+	 * @param d : vecchio valore
+	 * @return : valore formattato
+	 */
+	
 	public static double arrotondaSecondaCifra(double d) {
 		d = Math.round(d * 100);
 		d = d / 100;
 		return d;
 	}
+	
+	/**
+	 * Permette di acquisire un valore intero da tastiera con la gestione di eventuali eccezioni
+	 * @param input : Stringa da convertire
+	 * @return : valore numerico 
+	 */
 	
 	public static int conversioneInt(String input) {
 		Scanner tastiera = new Scanner(System.in);
@@ -59,6 +71,12 @@ public class Tools {
         
         return toInt;
     }
+	
+	/**
+	 * Permette di acquisire un valore double da tastiera con la gestione di eventuali eccezioni
+	 * @param input : Stringa da convertire
+	 * @return : valore numerico 
+	 */
 	
 	 public static double conversioneDouble(String input) {
 		 Scanner tastiera = new Scanner(System.in);
